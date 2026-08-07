@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Products</title>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+
+</head>
+
+<body>
+
+<div th:replace="fragments/dheader :: header"></div>
+
+<main>
+	<!-- ================= PRODUCT HERO ================= -->
+
+	<section class="prouctslider">
+
+	    <div class="prducticon">
+
+	        <ol class="breadcrumb">
+
+	            <li class="breadcrumb-item">
+
+	                <a th:href="@{/home}">
+	                    Home
+	                </a>
+
+	            </li>
+
+	            <li class="breadcrumb-item active">
+
+	                Products
+
+	            </li>
+
+	        </ol>
+
+	    </div>
+
+	</section>
+
+
+
+	<div class="card shadow-sm border-0 rounded-4 p-4">
+
+	    <div class="filter-box">
+
+	        <div class="top-filter">
+
+	            <div class="search-box">
+
+	                <label>Search</label>
+
+	                <input type="text"
+	                       id="inp"
+	                       class="form-control"
+	                       placeholder="Search Products...">
+
+	            </div>
+
+	            <div class="sort-box">
+
+	                <label>Sort By</label>
+
+					<select class="form-select" id="sort">
+
+					    <option value="default">Featured</option>
+
+					    <option value="low">
+					        Low to High
+					    </option>
+
+					    <option value="high">
+					        High to Low
+					    </option>
+
+					</select>
+
+	            </div>
+
+	        </div>
+
+	        <div class="category-box">
+
+				<label>
+				<input type="radio"
+				name="category"
+				value="all"
+				checked>
+				All
+				</label>
+
+				<label>
+				<input type="radio"
+				name="category"
+				value="vinegar">
+				Vinegar
+				</label>
+
+				<label>
+				<input type="radio"
+				name="category"
+				value="pickle">
+				Pickles
+				</label>
+
+				<label>
+				<input type="radio"
+				name="category"
+				value="jaggery">
+				Jaggery
+				</label>
+
+	        </div>
+
+	    </div>
+
+	</div>
+	<!-- ================= VINEGAR PRODUCTS ================= -->
+
+	<div class="container my-5">
+
+	    <div class="row g-4">
+
+	        <!-- Product 1 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="vinegar">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <a href="#" class="wishlist">
+	                    <i class="fa-regular fa-heart"></i>
+	                </a>
+
+	                <img th:src="@{/images/images/ashuslider/vapple.png}"
+	                     class="card-img-top product-img"
+	                     alt="Apple Cider Vinegar">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Apple Cider Vinegar
+	                    </h5>
+
+	                    <div class="rating mb-2">
+
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+
+	                        <span>(128 Reviews)</span>
+
+	                    </div>
+
+	                    <p class="product-desc">
+	                        Naturally fermented fresh apple vinegar for healthy digestion.
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹250
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+
+	                            <i class="fa-regular fa-eye"></i>
+
+	                            View
+
+								<button
+								class="btn btn-success w-50 add-cart"
+								data-name="Apple Cider Vinegar"
+								data-price="250"
+								data-image="/images/images/ashuslider/vapple.png">
+								Cart
+								</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 2 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="vinegar">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/vwhite.png}"
+	                     class="card-img-top product-img"
+	                     alt="White Vinegar">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        White Vinegar
+	                    </h5>
+
+	                    <div class="rating mb-2">
+
+	                        ★★★★★
+
+	                        <span>(128 Reviews)</span>
+
+	                    </div>
+
+	                    <p class="product-desc">
+
+	                        Pure white vinegar perfect for cooking and cleaning.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹180
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="White Vinegar"
+							data-price="180"
+							data-image="/images/images/ashuslider/vwhite.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 3 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="vinegar">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/vcoco.png}"
+	                     class="card-img-top product-img">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Coconut Vinegar
+	                    </h5>
+
+	                    <p class="product-desc">
+
+	                        Traditional coconut vinegar made from fresh coconut sap.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹220
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Coconut Vinegar"
+							data-price="220"
+							data-image="/images/images/ashuslider/vcoco.png">
+							Cart
+							</button>
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 4 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="vinegar">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/vsugar.png}"
+	                     class="card-img-top product-img">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Sugarcane Vinegar
+	                    </h5>
+
+	                    <p class="product-desc">
+
+	                        Natural sugarcane vinegar prepared from fresh sugarcane juice.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹200
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Sugarcane Vinegar"
+							data-price="200"
+							data-image="/images/images/ashuslider/vsugar.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</div>
+	<!-- ================= PICKLE PRODUCTS ================= -->
+
+	<div class="container my-5">
+
+	    <div class="row g-4">
+
+	        <!-- Product 1 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="pickle">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <a href="#" class="wishlist">
+	                    <i class="fa-regular fa-heart"></i>
+	                </a>
+
+	                <img th:src="@{/images/images/ashuslider/pmango.png}"
+	                     class="card-img-top product-img"
+	                     alt="Mango Pickle">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Mango Pickle
+	                    </h5>
+
+	                    <div class="rating mb-2">
+
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+
+	                        <span>(128 Reviews)</span>
+
+	                    </div>
+
+	                    <p class="product-desc">
+
+	                        Traditional homemade mango pickle prepared with authentic spices.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+
+	                        ₹280
+
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            <i class="fa-regular fa-eye"></i> View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Mango Pickle"
+							data-price="280"
+							data-image="/images/images/ashuslider/pmango.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 2 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="pickle">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/plime.png}"
+	                     class="card-img-top product-img"
+	                     alt="Lemon Pickle">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Lemon Pickle
+	                    </h5>
+
+	                    <p class="product-desc">
+
+	                        Tangy lemon pickle with natural spices.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+
+	                        ₹240
+
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+
+	                            View
+
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Lemon Pickle"
+							data-price="240"
+							data-image="/images/images/ashuslider/plime.png">
+							Cart
+							</button>
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 3 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="pickle">    <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/pgarlic.png}"
+	                     class="card-img-top product-img"
+	                     alt="Garlic Pickle">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+
+	                        Garlic Pickle
+
+	                    </h5>
+
+	                    <p class="product-desc">
+
+	                        Rich and spicy garlic pickle.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+
+	                        ₹260
+
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+
+	                            View
+
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Garlic Pickle"
+							data-price="260"
+							data-image="/images/images/ashuslider/pgarlic.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 4 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="pickle">
+	                <span class="badge bg-success product-badge">
+
+	                    Best Seller
+
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/pmixed.png}"
+	                     class="card-img-top product-img"
+	                     alt="Mixed Pickle">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+
+	                        Mixed Pickle
+
+	                    </h5>
+
+	                    <p class="product-desc">
+
+	                        Traditional mixed pickle with authentic homemade taste.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+
+	                        ₹300
+
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+
+	                            View
+
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Mixed Pickle"
+							data-price="300"
+							data-image="/images/images/ashuslider/pmixed.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</div>
+	<!-- ================= JAGGERY PRODUCTS ================= -->
+
+	<div class="container my-5">
+
+	    <div class="row g-4">
+
+	        <!-- Product 1 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="jaggery">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <a href="#" class="wishlist">
+	                    <i class="fa-regular fa-heart"></i>
+	                </a>
+
+	                <img th:src="@{/images/images/ashuslider/jpoweder.png}"
+	                     class="card-img-top product-img"
+	                     alt="Jaggery Powder">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Jaggery Powder
+	                    </h5>
+
+	                    <div class="rating mb-2">
+
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+	                        <i class="fa-solid fa-star text-warning"></i>
+
+	                        <span>(135 Reviews)</span>
+
+	                    </div>
+
+	                    <p class="product-desc">
+
+	                        Finely ground natural jaggery powder.
+
+	                    </p>
+
+	                    <h4 class="price text-success">
+
+	                        ₹220
+
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+
+	                            <i class="fa-regular fa-eye"></i>
+
+	                            View
+
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Jaggery Powder"
+							data-price="220"
+							data-image="/images/images/ashuslider/jpoweder.png">
+							Cart
+							</button>
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 2 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="jaggery">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/jcubes.png}"
+	                     class="card-img-top product-img"
+	                     alt="Jaggery Cubes">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Jaggery Cubes
+	                    </h5>
+
+	                    <p class="product-desc">
+	                        Pure sugarcane jaggery cubes.
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹250
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Jaggery Cubes"
+							data-price="250"
+							data-image="/images/images/ashuslider/jcubes.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 3 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="jaggery">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/jliquid.png}"
+	                     class="card-img-top product-img"
+	                     alt="Liquid Jaggery">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Liquid Jaggery
+	                    </h5>
+
+	                    <p class="product-desc">
+	                        Rich caramel flavored liquid jaggery.
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹280
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Liquid Jaggery"
+							data-price="280"
+							data-image="/images/images/ashuslider/jliquid.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	        <!-- Product 4 -->
+
+	        <div class="col-lg-3 col-md-6">
+
+				<div class="card product-card border-0 shadow-sm"
+				data-category="jaggery">
+	                <span class="badge bg-success product-badge">
+	                    Best Seller
+	                </span>
+
+	                <img th:src="@{/images/images/ashuslider/jpalm.png}"
+	                     class="card-img-top product-img"
+	                     alt="Palm Jaggery">
+
+	                <div class="card-body">
+
+	                    <h5 class="product-title">
+	                        Palm Jaggery
+	                    </h5>
+
+	                    <p class="product-desc">
+	                        Traditional palm jaggery rich in minerals.
+	                    </p>
+
+	                    <h4 class="price text-success">
+	                        ₹320
+	                    </h4>
+
+	                    <div class="d-flex">
+
+	                        <button class="btn btn-outline-success w-50 me-2">
+	                            View
+	                        </button>
+
+							<button
+							class="btn btn-success w-50 add-cart"
+							data-name="Palm Jaggery"
+							data-price="320"
+							data-image="/images/images/ashuslider/jpalm.png">
+							Cart
+							</button>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</div>
+	<!-- ================= FEATURES STRIP ================= -->
+
+	<section class="features-strip py-4">
+
+	    <div class="container">
+
+	        <div class="row text-white align-items-center">
+
+	            <!-- Feature 1 -->
+
+	            <div class="col-lg-4 col-md-4">
+
+	                <div class="feature-box d-flex align-items-center">
+
+	                    <div class="icon-circle">
+
+	                        <i class="fa-solid fa-leaf"></i>
+
+	                    </div>
+
+	                    <div class="ms-3">
+
+	                        <h4>100% Natural Ingredients</h4>
+
+	                        <p>Pure & Natural products for a healthy life.</p>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	            <!-- Feature 2 -->
+
+	            <div class="col-lg-4 col-md-4 border-start border-end">
+
+	                <div class="feature-box d-flex align-items-center">
+
+	                    <div class="icon-circle">
+
+	                        <i class="fa-solid fa-box-open"></i>
+
+	                    </div>
+
+	                    <div class="ms-3">
+
+	                        <h4>Secure Packaging</h4>
+
+	                        <p>Hygienically packed and safe delivery.</p>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	            <!-- Feature 3 -->
+
+	            <div class="col-lg-4 col-md-4">
+
+	                <div class="feature-box d-flex align-items-center">
+
+	                    <div class="icon-circle">
+
+	                        <i class="fa-solid fa-truck-fast"></i>
+
+	                    </div>
+
+	                    <div class="ms-3">
+
+	                        <h4>On Time Delivery</h4>
+
+	                        <p>We deliver on time at your doorstep.</p>
+
+	                    </div>
+
+	                </div>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</section>
+
+
+
+	<!-- ================= NEWSLETTER ================= -->
+
+	<section class="newsletter py-5">
+
+	    <div class="container">
+
+	        <div class="row justify-content-center">
+
+	            <div class="col-lg-8 text-center">
+
+	                <h2 class="fw-bold text-success">
+
+	                    Subscribe to our Newsletter
+
+	                </h2>
+
+	                <p class="text-muted mb-4">
+
+	                    Get the latest updates on new products and offers.
+
+	                </p>
+
+	                <form class="d-flex shadow rounded overflow-hidden">
+
+	                    <input type="email"
+	                           class="form-control border-0 p-3"
+	                           placeholder="Enter your email address">
+
+	                    <button class="btn btn-success px-5">
+
+	                        Subscribe
+
+	                    </button>
+
+	                </form>
+
+	            </div>
+
+	        </div>
+
+	    </div>
+
+	</section>
+
+	</main>
+
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+
+
+	<!-- Bootstrap -->
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- GSAP -->
+
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+	<!-- Product JS -->
+
+
+	<script src="/js/product.js"></script>
+
+	</body>
+
+	</html>

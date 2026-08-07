@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="header">
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3">
+
+        <div class="container-fluid">
+
+            <!-- Left -->
+            <h4 class="fw-bold text-success mb-0">
+                <i class="fa-solid fa-gauge-high"></i>
+                Admin Dashboard
+            </h4>
+
+            <!-- Right -->
+            <div class="d-flex align-items-center">
+
+                <span class="me-3 fw-semibold text-dark">
+                    Welcome Admin
+                </span>
+
+                <div class="dropdown">
+
+                    <a href="#"
+                       class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                       data-bs-toggle="dropdown">
+
+                        <img src="https://ui-avatars.com/api/?name=Admin&background=16a34a&color=fff"
+                             width="40"
+                             height="40"
+                             class="rounded-circle me-2">
+
+                        <span class="fw-semibold text-dark">
+                            Admin
+                        </span>
+
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-user me-2"></i>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">
+                                <i class="fa-solid fa-gear me-2"></i>
+                                Settings
+                            </a>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <li>
+                            <a class="dropdown-item text-danger"
+                               th:href="@{/admin/login}">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                Logout
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</div>
+
+</html>

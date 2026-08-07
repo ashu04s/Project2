@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<footer th:fragment="footer" class="footer pt-5 pb-3">
+
+    <div class="container">
+
+        <div class="row gy-4">
+
+            <!-- Logo -->
+            <div class="col-lg-4">
+
+                <h2 class="text-white fw-bold">
+                    <i class="fa-solid fa-leaf text-success"></i>
+                    Vinegar & Jaggery
+                </h2>
+
+                <h5 class="text-success mb-4">STORE</h5>
+
+                <p>
+                    We are committed to delivering natural,
+                    pure and healthy products to your home.
+                    Thank you for choosing us!
+                </p>
+
+                <div class="social-icons mt-4">
+
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2">
+
+                <h4>QUICK LINKS</h4>
+
+                <ul class="list-unstyled">
+
+                    <li><a th:href="@{/}">Home</a></li>
+
+                    <li><a th:href="@{/about}">About Us</a></li>
+
+                    <li><a th:href="@{/products}">Products</a></li>
+
+                    <li><a th:href="@{/shop}">Shop</a></li>
+
+                    <li><a th:href="@{/contact}">Contact Us</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Customer Service -->
+            <div class="col-lg-3">
+
+                <h4>CUSTOMER SERVICE</h4>
+
+                <ul class="list-unstyled">
+
+                    <li><a th:href="@{/account}">My Account</a></li>
+
+                    <li><a th:href="@{/track-order}">Track Order</a></li>
+
+                    <li><a th:href="@{/shipping-policy}">Shipping Policy</a></li>
+
+                    <li><a th:href="@{/return-policy}">Return & Refund</a></li>
+
+                    <li><a th:href="@{/faq}">FAQs</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+            <div class="col-lg-3">
+
+                <h4>CONTACT US</h4>
+
+                <ul class="contact-info list-unstyled">
+
+                    <li class="mb-2">
+                        <i class="fa-solid fa-phone"></i>
+                        +91 9711467776
+                    </li>
+
+                    <li class="mb-2">
+                        <i class="fa-solid fa-envelope"></i>
+                        ashu74516@gmail.com
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        X-797 Jalvayu Vihar P-3,<br>
+                        Greater Noida
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr class="border-secondary my-4">
+
+        <div class="text-center text-light">
+            © 2026 Vinegar & Jaggery Store. All Rights Reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

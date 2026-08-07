@@ -1,0 +1,289 @@
+.about-hero-bg{
+
+    height:500px;
+
+    background:url("../images/images/ashuslider/productslider.png") no-repeat center center;
+
+    background-size:cover;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.about-tag{
+
+    color:#2E7D32;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+.about-tag::after{
+
+    content:"";
+
+    width:70px;
+
+    height:2px;
+
+    background:#2E7D32;
+
+    display:inline-block;
+
+    margin-left:12px;
+
+    margin-bottom:5px;
+
+}
+
+.about-hero-bg h1{
+
+    font-size:60px;
+
+    font-weight:800;
+
+    color:#222;
+
+    margin:20px 0;
+
+}
+
+.about-hero-bg h1 span{
+
+    color:#2E7D32;
+
+}
+
+.about-hero-bg p{
+
+    width:500px;
+
+    font-size:19px;
+
+    line-height:34px;
+
+    color:#555;
+
+}
+
+.hero-btn{
+
+    padding:12px 30px;
+
+    border-radius:40px;
+
+    margin-top:20px;
+
+    font-weight:600;
+
+}
+/*================ WHY CHOOSE US =================*/
+
+.why-choose{
+    padding:70px 0;
+    background:#fff;
+}
+
+.section-title{
+    font-size:46px;
+    font-weight:800;
+    color:#14532d;
+    position:relative;
+    display:inline-block;
+    margin-bottom:50px;
+}
+
+.section-title::before,
+.section-title::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:60px;
+    height:2px;
+    background:#14532d;
+}
+
+.section-title::before{
+    left:-80px;
+}
+
+.section-title::after{
+    right:-80px;
+}
+
+/*============== Feature Card ==============*/
+
+.feature-card{
+    text-align:center;
+    transition:.4s;
+    cursor:pointer;
+    padding:10px;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+}
+
+.icon-circle{
+    width:95px;
+    height:95px;
+    background:#f4f7ed;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    margin-bottom:22px;
+    transition:.3s;
+}
+
+.feature-card:hover .icon-circle{
+    background:#198754;
+}
+
+.icon-circle i{
+    font-size:38px;
+    color:#2E7D32;
+    transition:.3s;
+}
+
+.feature-card:hover i{
+    color:#fff;
+}
+
+.feature-card h5{
+    font-size:25px;
+    font-weight:700;
+    margin-bottom:12px;
+    color:#222;
+}
+
+.feature-card p{
+    color:#666;
+    font-size:17px;
+    line-height:28px;
+}
+
+/*============== Journey Card ==============*/
+
+.journey-card{
+
+    background:#fff;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+    height:100%;
+}
+
+.journey-card h2{
+
+    color:#14532d;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+}
+
+.journey-card hr{
+
+    width:80px;
+
+    height:3px;
+
+    background:#198754;
+
+    border:none;
+
+    opacity:1;
+
+    margin-bottom:25px;
+}
+
+.journey-card p{
+
+    color:#444;
+
+    font-size:18px;
+
+    line-height:34px;
+}
+
+.journey-card h4{
+
+    color:#2E7D32;
+
+    font-family:cursive;
+
+    font-size:34px;
+
+    margin-top:25px;
+}
+
+/*============== Responsive ==============*/
+
+@media(max-width:992px){
+
+.section-title{
+    text-align:center;
+    display:block;
+}
+
+.section-title::before,
+.section-title::after{
+    display:none;
+}
+
+.feature-card{
+    margin-bottom:35px;
+}
+
+.journey-card{
+    margin-top:50px;
+}
+
+}
+
+@media(max-width:768px){
+
+.section-title{
+    font-size:34px;
+}
+
+.feature-card h5{
+    font-size:20px;
+}
+
+.feature-card p{
+    font-size:15px;
+}
+
+.icon-circle{
+    width:80px;
+    height:80px;
+}
+
+.icon-circle i{
+    font-size:30px;
+}
+
+.journey-card h2{
+    font-size:30px;
+}
+
+.journey-card h4{
+    font-size:26px;
+}
+
+}

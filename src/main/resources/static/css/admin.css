@@ -1,0 +1,95 @@
+.navbar{
+    border-radius:15px;
+    margin-bottom:20px;
+    background:#fff;
+}
+
+.navbar h4{
+    color:#16a34a;
+    font-weight:bold;
+}
+
+.navbar img{
+    border:2px solid #16a34a;
+}
+body{
+    margin:0;
+    background:#f5f7fb;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+    background:#1e293b;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    box-shadow:4px 0 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo i{
+    font-size:40px;
+    color:#22c55e;
+    margin-bottom:10px;
+}
+
+.logo h3{
+    margin:0;
+    font-weight:bold;
+}
+
+.logo small{
+    color:#cbd5e1;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:20px 10px;
+    margin:0;
+    flex:1;
+}
+
+.sidebar ul li{
+    margin-bottom:8px;
+}
+
+.sidebar ul li a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#d1d5db;
+    text-decoration:none;
+    padding:14px 18px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active{
+    background:#22c55e;
+    color:white;
+}
+
+.sidebar ul li a i{
+    width:22px;
+    text-align:center;
+}
+
+.logout{
+    padding:20px;
+}
+
+.content{
+    margin-left:260px;
+    padding:30px;
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<header th:fragment="header">
+
+    <!-- Top Bar -->
+    <div class="container-fluid">
+        <div class="row bg-success text-light py-3">
+
+            <div class="col-md-5 text-center text-md-start">
+                <p class="mb-0">
+                    🌿 100% Natural | No Chemical | Premium Quality
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mb-0">
+                    🚚 Free Delivery on Orders Above ₹499 |
+                    📦 Track Order |
+                    ❓ Need Help?
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center"
+               th:href="@{/home}">
+
+                <img th:src="@{/images/images/ashuslider/logo2.png}"
+                     class="logo me-3"
+                     alt="Logo">
+
+                <div>
+
+                    <h5 class="mb-0">
+                        <span class="text-success fw-bold">VINEGAR &</span><br>
+                        <span class="text-danger fw-bold">JAGGERY</span>
+                        <span class="text-success fw-bold">STORE</span>
+                    </h5>
+
+                    <small class="text-muted">
+                        Goodness from Nature to Your Home
+                    </small>
+
+                </div>
+
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <!-- Navbar Menu -->
+            <div class="collapse navbar-collapse"
+                 id="navbarNav">
+
+                <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold fs-6"
+                           th:href="@{/home}">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold fs-6"
+                           th:href="@{/products}">
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold fs-6"
+                           href="#">
+                            Categories
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold fs-6"
+                           th:href="@{/about}">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold fs-6"
+                           th:href="@{/contact}">
+                            Contact Us
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Right Side Icons -->
+                <div class="d-flex align-items-center">
+
+                    <a href="#"
+                       class="icon-link me-3">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+
+                    <!-- Admin Login -->
+                    <a th:href="@{/admin/login}"
+                       class="icon-link me-3 d-flex align-items-center">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <span class="login ms-2">
+                            Login
+                        </span>
+
+                    </a>
+
+                    <!-- Cart -->
+					<a th:href="@{/cart}"
+					   class="icon-link position-relative">
+                        <i class="fa-solid fa-cart-shopping"></i>
+
+                        <span id="count"
+                              class="position-absolute count top-0 start-100 translate-middle badge rounded-pill bg-success">
+                            0
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+</body>
+</html>

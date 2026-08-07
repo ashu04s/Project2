@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sidebar">
+
+    <aside class="sidebar">
+
+        <!-- Logo -->
+        <div class="logo">
+            <i class="fa-solid fa-leaf"></i>
+            <h3>V&J Store</h3>
+            <small>Admin Panel</small>
+        </div>
+
+        <!-- Menu -->
+        <ul>
+
+			<li>
+			    <a th:href="@{/admin/dashboard}">
+			        <i class="fa-solid fa-gauge-high"></i>
+			        <span>Dashboard</span>
+			    </a>
+			</li>
+
+			<li>
+			    <a th:href="@{/admin/category/show}">
+			        <i class="fa-solid fa-list"></i>
+			        <span>Categories</span>
+			    </a>
+			</li>
+
+			<li>
+			    <a th:href="@{/admin/brand/show}">
+			        <i class="fa-solid fa-tags"></i>
+			        <span>Brands</span>
+			    </a>
+			</li>
+
+			<li>
+			    <a th:href="@{/admin/product/list}">
+			        <i class="fa-solid fa-box-open"></i>
+			        <span>Products</span>
+			    </a>
+			</li>
+			<li>
+                <a href="#">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- Logout -->
+        <div class="logout">
+            <a th:href="@{/admin/login}" class="btn btn-danger w-100">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+</div>
+
+</html>
