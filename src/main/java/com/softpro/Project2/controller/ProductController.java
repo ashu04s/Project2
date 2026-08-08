@@ -8,7 +8,12 @@ import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.softpro.Project2.entity.Product;
@@ -29,7 +34,8 @@ public class ProductController {
     @Autowired
     private BrandRepository brandRepository;
 
-    // ================= Add Product =================
+
+    // ================= ADD PRODUCT =================
 
     @GetMapping("/add")
     public String addProduct(Model model) {
@@ -41,107 +47,162 @@ public class ProductController {
         return "admin/product/add";
     }
 
-    // ================= Save Product =================
+
+    // ================= SAVE PRODUCT =================
 
     @PostMapping("/save")
-    public String saveProduct(@ModelAttribute Product product,
-                              @RequestParam("file1") MultipartFile file1,
-                              @RequestParam("file2") MultipartFile file2)
+    public String saveProduct(
+            @ModelAttribute Product product,
+            @RequestParam("file1") MultipartFile file1,
+            @RequestParam("file2") MultipartFile file2)
             throws IOException {
 
-        String uploadDir = System.getProperty("user.dir")
-                + "/src/main/resources/static/uploads/";
+        // Upload folder
+        String uploadDir = System.getProperty("user.dir") + "/uploads/";
 
         Path uploadPath = Paths.get(uploadDir);
 
+        // Create uploads folder if it doesn't exist
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
+
+        // ---------- SMALL IMAGE ----------
+
         if (!file1.isEmpty()) {
+
             String fileName = file1.getOriginalFilename();
-            file1.transferTo(uploadPath.resolve(fileName));
+
+            Path filePath = uploadPath.resolve(fileName);
+
+            file1.transferTo(filePath.toFile());
+
             product.setProduct_image_sm(fileName);
         }
 
+
+        // ---------- LARGE IMAGE ----------
+
         if (!file2.isEmpty()) {
+
             String fileName = file2.getOriginalFilename();
-            file2.transferTo(uploadPath.resolve(fileName));
+
+            Path filePath = uploadPath.resolve(fileName);
+
+            file2.transferTo(filePath.toFile());
+
             product.setProduct_image_lg(fileName);
         }
 
+
+        // Save product into database
         productService.saveProduct(product);
 
         return "redirect:/admin/product/list";
     }
 
-    // ================= Product List =================
+
+    // ================= PRODUCT LIST =================
 
     @GetMapping("/list")
     public String listProduct(Model model) {
 
-        model.addAttribute("products", productService.getProductList());
+        model.addAttribute(
+                "products",
+                productService.getProductList()
+        );
 
         return "admin/product/list";
     }
 
-    // ================= Edit Product =================
+
+    // ================= EDIT PRODUCT =================
 
     @GetMapping("/edit/{id}")
-    public String editProduct(@PathVariable Integer id, Model model) {
+    public String editProduct(
+            @PathVariable Integer id,
+            Model model) {
 
         Product product = productService.getProductById(id);
 
         model.addAttribute("product", product);
-        model.addAttribute("categoryList", categoryRepository.findAll());
-        model.addAttribute("brandList", brandRepository.findAll());
+        model.addAttribute(
+                "categoryList",
+                categoryRepository.findAll()
+        );
+        model.addAttribute(
+                "brandList",
+                brandRepository.findAll()
+        );
 
         return "admin/product/edit";
     }
 
-    // ================= Update Product =================
+
+    // ================= UPDATE PRODUCT =================
 
     @PostMapping("/update")
-    public String updateProduct(@ModelAttribute Product product,
-                                @RequestParam("file1") MultipartFile file1,
-                                @RequestParam("file2") MultipartFile file2)
+    public String updateProduct(
+            @ModelAttribute Product product,
+            @RequestParam("file1") MultipartFile file1,
+            @RequestParam("file2") MultipartFile file2)
             throws IOException {
 
-        String uploadDir = System.getProperty("user.dir")
-                + "/src/main/resources/static/uploads/";
+        // Upload folder
+        String uploadDir = System.getProperty("user.dir") + "/uploads/";
 
         Path uploadPath = Paths.get(uploadDir);
 
+        // Create folder if it doesn't exist
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
+
+        // ---------- SMALL IMAGE ----------
+
         if (!file1.isEmpty()) {
+
             String fileName = file1.getOriginalFilename();
-            file1.transferTo(uploadPath.resolve(fileName));
+
+            Path filePath = uploadPath.resolve(fileName);
+
+            file1.transferTo(filePath.toFile());
+
             product.setProduct_image_sm(fileName);
         }
 
+
+        // ---------- LARGE IMAGE ----------
+
         if (!file2.isEmpty()) {
+
             String fileName = file2.getOriginalFilename();
-            file2.transferTo(uploadPath.resolve(fileName));
+
+            Path filePath = uploadPath.resolve(fileName);
+
+            file2.transferTo(filePath.toFile());
+
             product.setProduct_image_lg(fileName);
         }
 
+
+        // Save updated product
         productService.saveProduct(product);
 
         return "redirect:/admin/product/list";
     }
 
-    // ================= Delete Product =================
+
+    // ================= DELETE PRODUCT =================
 
     @GetMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable Integer id) {
+    public String deleteProduct(
+            @PathVariable Integer id) {
 
         productService.deleteProduct(id);
 
         return "redirect:/admin/product/list";
     }
-    
-
 }
