@@ -249,13 +249,10 @@
 
 			                <div class="d-flex justify-content-between">
 
-			                    <a href="#"
-			                       class="btn btn-success">
-
-			                        View Details
-
-			                    </a>
-
+								<a th:href="@{/product/{id}(id=${product.productId})}"
+								   class="btn btn-success">
+								    View Details
+								</a>
 			                    <button class="btn btn-outline-success">
 
 			                        <i class="fa-solid fa-cart-arrow-down"></i>

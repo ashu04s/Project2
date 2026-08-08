@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Product Details</title>
+
+
+    <!-- ================= FONT AWESOME ================= -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+
+
+    <!-- ================= BOOTSTRAP ================= -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+
+    <!-- ================= COMMON CSS ================= -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+
+
+    <!-- ================= PRODUCT DETAILS CSS ================= -->
+
+    <style>
+
+        body {
+            background-color: #f5f7f6;
+        }
+
+
+        /* ================= PRODUCT SECTION ================= */
+
+        .product-section {
+            padding: 50px 0;
+        }
+
+
+        /* ================= PRODUCT CARD ================= */
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* ================= PRODUCT IMAGE ================= */
+
+        .product-image-box {
+            background: #f8faf9;
+            border-radius: 18px;
+            padding: 25px;
+            text-align: center;
+        }
+
+
+        .product-image {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+
+        /* ================= PRODUCT TITLE ================= */
+
+        .product-title {
+            font-size: 38px;
+            font-weight: 700;
+            color: #198754;
+            margin-bottom: 15px;
+        }
+
+
+        /* ================= PRICE ================= */
+
+        .product-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: #198754;
+            margin: 15px 0;
+        }
+
+
+        /* ================= RATING ================= */
+
+        .rating-box {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+
+
+        /* ================= INFO BOX ================= */
+
+        .info-box {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        /* ================= QUANTITY ================= */
+
+        .quantity-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+
+            border: 1px solid #198754;
+
+            background: white;
+
+            color: #198754;
+
+            border-radius: 8px;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+
+        .quantity-btn:hover {
+            background: #198754;
+            color: white;
+        }
+
+
+        .quantity-input {
+            width: 55px;
+            height: 40px;
+
+            text-align: center;
+
+            border: 1px solid #ddd;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+        }
+
+
+        /* ================= ADD TO CART ================= */
+
+        .btn-cart {
+            background: #198754;
+
+            color: white;
+
+            border: none;
+
+            padding: 13px 28px;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .btn-cart:hover {
+            background: #146c43;
+            color: white;
+        }
+
+
+        /* ================= BUY NOW ================= */
+
+        .btn-buy {
+            background: #ffc107;
+
+            color: #212529;
+
+            border: none;
+
+            padding: 13px 28px;
+
+            border-radius: 8px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+
+        .btn-buy:hover {
+            background: #e0a800;
+        }
+
+
+        /* ================= DESCRIPTION ================= */
+
+        .description-section {
+            background: white;
+
+            margin-top: 35px;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            border: 1px solid #eee;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-btn {
+            color: #198754;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+
+        .back-btn:hover {
+            color: #146c43;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .product-title {
+                font-size: 28px;
+            }
+
+            .product-price {
+                font-size: 26px;
+            }
+
+            .product-card {
+                padding: 20px;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<div th:replace="~{fragments/dheader :: header}"></div>
+
+
+<!-- ================================================= -->
+<!-- PRODUCT DETAILS -->
+<!-- ================================================= -->
+
+<section class="product-section">
+
+    <div class="container">
+
+
+        <!-- ================= BACK ================= -->
+
+        <div class="mb-4">
+
+            <a th:href="@{/products}"
+               class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Products
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= PRODUCT CARD ================= -->
+
+        <div class="product-card">
+
+            <div class="row g-5 align-items-center">
+
+
+                <!-- ================= IMAGE ================= -->
+
+                <div class="col-lg-6">
+
+                    <div class="product-image-box">
+
+                        <img th:src="@{'/uploads/' + ${product.product_image_lg}}"
+                             class="product-image"
+                             alt="Product Image">
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= DETAILS ================= -->
+
+                <div class="col-lg-6">
+
+
+                    <!-- PRODUCT NAME -->
+
+                    <h1 class="product-title"
+                        th:text="${product.product_name}">
+
+                    </h1>
+
+
+                    <!-- RATING -->
+
+                    <div class="rating-box">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        <span th:text="${product.product_rating}">
+                        </span>
+
+                        / 5
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="product-price">
+
+                        ₹
+
+                        <span th:text="${product.product_selling_price}">
+                        </span>
+
+                    </div>
+
+
+                    <!-- ================= PRODUCT INFORMATION ================= -->
+
+                    <div class="mt-4">
+
+
+                        <!-- WEIGHT -->
+
+                        <div class="info-box">
+
+                            <i class="fa-solid fa-weight-scale text-success me-2"></i>
+
+                            <span class="info-label">
+                                Weight:
+                            </span>
+
+                            <span th:text="${product.product_weight}">
+                            </span>
+
+                            <span th:text="${product.product_weight_type}">
+                            </span>
+
+                        </div>
+
+
+                        <!-- AVAILABLE QUANTITY -->
+
+                        <div class="info-box">
+
+                            <i class="fa-solid fa-box text-success me-2"></i>
+
+                            <span class="info-label">
+                                Available:
+                            </span>
+
+                            <span th:text="${product.product_qty}">
+                            </span>
+
+                            pieces
+
+                        </div>
+
+
+                        <!-- STATUS -->
+
+                        <div class="info-box">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            <span class="info-label">
+                                Status:
+                            </span>
+
+                            <span th:text="${product.product_status}">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= QUANTITY SELECTOR ================= -->
+
+                    <div class="quantity-box">
+
+                        <span class="fw-bold">
+                            Quantity:
+                        </span>
+
+
+                        <button type="button"
+                                class="quantity-btn"
+                                onclick="decreaseQuantity()">
+
+                            −
+
+                        </button>
+
+
+                        <input type="text"
+                               id="quantity"
+                               class="quantity-input"
+                               value="1"
+                               readonly>
+
+
+                        <button type="button"
+                                class="quantity-btn"
+                                onclick="increaseQuantity()">
+
+                            +
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ================= BUTTONS ================= -->
+
+                    <div class="d-flex gap-3 flex-wrap">
+
+
+                        <!-- ADD TO CART -->
+
+                        <button type="button"
+                                class="btn-cart"
+
+                                th:data-product-id="${product.product_id}"
+
+                                th:data-product-name="${product.product_name}"
+
+                                th:data-price="${product.product_selling_price}"
+
+                                th:data-image="${product.product_image_sm}"
+
+                                onclick="addToCart(this)">
+
+                            <i class="fa-solid fa-cart-shopping me-2"></i>
+
+                            Add To Cart
+
+                        </button>
+
+
+                        <!-- BUY NOW -->
+
+                        <button type="button"
+                                class="btn-buy">
+
+                            <i class="fa-solid fa-bolt me-2"></i>
+
+                            Buy Now
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= DESCRIPTION ================= -->
+
+            <div class="description-section">
+
+                <h3 class="fw-bold text-success mb-3">
+
+                    Product Description
+
+                </h3>
+
+
+                <p class="text-muted fs-5"
+                   th:text="${product.product_desc}">
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+
+/* =================================================
+   PRODUCT PAGE QUANTITY
+   ================================================= */
+
+let selectedQuantity = 1;
+
+
+function increaseQuantity() {
+
+    selectedQuantity++;
+
+    document.getElementById("quantity").value =
+        selectedQuantity;
+
+}
+
+
+function decreaseQuantity() {
+
+    if (selectedQuantity > 1) {
+
+        selectedQuantity--;
+
+        document.getElementById("quantity").value =
+            selectedQuantity;
+
+    }
+
+}
+
+
+
+/* =================================================
+   ADD TO CART
+   ================================================= */
+
+function addToCart(button) {
+
+
+    // Product information
+    let productId =
+        button.dataset.productId;
+
+
+    let productName =
+        button.dataset.productName;
+
+
+    let price =
+        Number(button.dataset.price);
+
+
+    let image =
+        button.dataset.image;
+
+
+
+    // Check price
+    if (isNaN(price)) {
+
+        alert("Product price is not available!");
+
+        return;
+
+    }
+
+
+
+    // Get existing cart
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+
+
+    // Find existing product
+    let existingProduct =
+        cart.find(
+            item => item.productId == productId
+        );
+
+
+
+    // Product already exists
+    if (existingProduct) {
+
+
+        existingProduct.quantity =
+            Number(existingProduct.quantity || 1)
+            + selectedQuantity;
+
+
+    }
+
+    // New product
+    else {
+
+
+        cart.push({
+
+            productId: productId,
+
+            name: productName,
+
+            price: price,
+
+            image: image,
+
+            quantity: selectedQuantity
+
+        });
+
+    }
+
+
+
+    // Save cart
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+
+    // Update header count
+    updateCartCount();
+
+
+
+    alert(
+        productName + " added to cart!"
+    );
+
+}
+
+
+
+/* =================================================
+   UPDATE HEADER CART COUNT
+   ================================================= */
+
+function updateCartCount() {
+
+
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+
+
+    let total = 0;
+
+
+
+    cart.forEach(function(item) {
+
+        total += Number(
+            item.quantity ?? item.qty ?? 0
+        );
+
+    });
+
+
+
+    let count =
+        document.getElementById("count");
+
+
+
+    if (count) {
+
+        count.innerText = total;
+
+    }
+
+}
+
+
+
+/* =================================================
+   PAGE LOAD
+   ================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateCartCount();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
