@@ -1,20 +1,39 @@
 // =======================================
-// PRODUCT.JS PART 1
+// PRODUCT.JS
 // =======================================
 
-// Cart
+// =======================================
+// CART
+// =======================================
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Wishlist
+
+// =======================================
+// WISHLIST
+// =======================================
+
 let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-// Search Box
+
+// =======================================
+// SEARCH BOX
+// =======================================
+
 const searchInput = document.getElementById("inp");
 
-// Sort Dropdown
+
+// =======================================
+// SORT DROPDOWN
+// =======================================
+
 const sortSelect = document.getElementById("sort");
 
-// All Product Cards
+
+// =======================================
+// ALL PRODUCT CARDS
+// =======================================
+
 const cards = document.querySelectorAll(".product-card");
 
 
@@ -30,9 +49,13 @@ if (searchInput) {
 
         cards.forEach(card => {
 
-            const title = card.querySelector(".product-title")
-                              .innerText
-                              .toLowerCase();
+            const titleElement = card.querySelector(".product-title");
+
+            if (!titleElement) {
+                return;
+            }
+
+            const title = titleElement.innerText.toLowerCase();
 
             if (title.includes(value)) {
 
@@ -65,12 +88,19 @@ if (sortSelect) {
 
             products.sort((a, b) => {
 
+                const priceElementA = a.querySelector(".price");
+                const priceElementB = b.querySelector(".price");
+
+                if (!priceElementA || !priceElementB) {
+                    return 0;
+                }
+
                 const priceA = parseInt(
-                    a.querySelector(".price").innerText.replace(/[^\d]/g, "")
+                    priceElementA.innerText.replace(/[^\d]/g, "")
                 );
 
                 const priceB = parseInt(
-                    b.querySelector(".price").innerText.replace(/[^\d]/g, "")
+                    priceElementB.innerText.replace(/[^\d]/g, "")
                 );
 
                 if (this.value === "low") {
@@ -100,17 +130,14 @@ if (sortSelect) {
     });
 
 }
+
+
 // =======================================
-// PART 2
 // CATEGORY FILTER
-// WISHLIST
-// VIEW PRODUCT
 // =======================================
 
-
-// ---------------- CATEGORY FILTER ----------------
-
-const categoryRadio = document.querySelectorAll("input[name='category']");
+const categoryRadio =
+    document.querySelectorAll("input[name='category']");
 
 categoryRadio.forEach(radio => {
 
@@ -145,8 +172,9 @@ categoryRadio.forEach(radio => {
 });
 
 
-
-// ---------------- WISHLIST ----------------
+// =======================================
+// WISHLIST
+// =======================================
 
 document.querySelectorAll(".wishlist").forEach(btn => {
 
@@ -155,6 +183,10 @@ document.querySelectorAll(".wishlist").forEach(btn => {
         e.preventDefault();
 
         const icon = this.querySelector("i");
+
+        if (!icon) {
+            return;
+        }
 
         icon.classList.toggle("fa-regular");
         icon.classList.toggle("fa-solid");
@@ -165,8 +197,9 @@ document.querySelectorAll(".wishlist").forEach(btn => {
 });
 
 
-
-// ---------------- VIEW PRODUCT ----------------
+// =======================================
+// VIEW PRODUCT
+// =======================================
 
 document.querySelectorAll(".btn-outline-success").forEach(btn => {
 
@@ -174,9 +207,19 @@ document.querySelectorAll(".btn-outline-success").forEach(btn => {
 
         const card = this.closest(".product-card");
 
-        const name = card.querySelector(".product-title").innerText;
+        if (!card) {
+            return;
+        }
 
-        const price = card.querySelector(".price").innerText;
+        const nameElement = card.querySelector(".product-title");
+        const priceElement = card.querySelector(".price");
+
+        if (!nameElement || !priceElement) {
+            return;
+        }
+
+        const name = nameElement.innerText;
+        const price = priceElement.innerText;
 
         alert(
             "Product : " + name +
@@ -186,46 +229,71 @@ document.querySelectorAll(".btn-outline-success").forEach(btn => {
     });
 
 });
-// Add To Cart
+
+
+// =======================================
+// ADD TO CART
+// =======================================
+
 document.querySelectorAll(".add-cart").forEach(button => {
 
     button.addEventListener("click", function () {
 
         const name = this.dataset.name;
-        const price = parseFloat(this.dataset.price);
+        const price = Number(this.dataset.price);
         const image = this.dataset.image;
 
-        // Check Existing Product
-        let existingProduct = cart.find(item => item.name === name);
+        // Check existing product
+        let existingProduct = cart.find(
+            item => item.name === name
+        );
 
         if (existingProduct) {
 
-            existingProduct.qty++;
+            // Support both qty and quantity
+            existingProduct.qty =
+                Number(existingProduct.qty ?? existingProduct.quantity ?? 0) + 1;
+
+            // Keep quantity also synchronized
+            existingProduct.quantity = existingProduct.qty;
 
         } else {
 
             cart.push({
+
                 name: name,
                 price: price,
                 image: image,
-                qty: 1
+
+                qty: 1,
+                quantity: 1
+
             });
 
         }
 
-        // Save
-        localStorage.setItem("cart", JSON.stringify(cart));
 
-        // Update Count
+        // Save cart
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart)
+        );
+
+
+        // Update cart count
         updateCartCount();
 
-        // Button Animation
+
+        // Button animation
         this.innerHTML = "✔ Added";
+
         this.disabled = true;
+
 
         setTimeout(() => {
 
             this.innerHTML = "Cart";
+
             this.disabled = false;
 
         }, 1000);
@@ -235,31 +303,53 @@ document.querySelectorAll(".add-cart").forEach(button => {
 });
 
 
-// ======================================
+// =======================================
 // UPDATE CART COUNT
-// ======================================
+// =======================================
 
 function updateCartCount() {
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartData =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
     let total = 0;
 
-    cart.forEach(item => {
 
-        total += item.qty;
+    cartData.forEach(item => {
+
+        // Support both qty and quantity
+        const quantity =
+            Number(item.qty ?? item.quantity ?? 0);
+
+        // Prevent NaN
+        if (!isNaN(quantity)) {
+
+            total += quantity;
+
+        }
 
     });
 
-    let count = document.getElementById("count");
+
+    const count =
+        document.getElementById("count");
+
 
     if (count) {
 
-        count.innerHTML = total;
+        count.innerText = total;
 
     }
 
 }
 
-// Load Count On Page Open
-updateCartCount();
+
+// =======================================
+// LOAD CART COUNT WHEN PAGE OPENS
+// =======================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    updateCartCount();
+
+});
