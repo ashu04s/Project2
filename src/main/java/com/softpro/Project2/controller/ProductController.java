@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.softpro.Project2.entity.Admin;
 import com.softpro.Project2.entity.Product;
 import com.softpro.Project2.repository.BrandRepository;
 import com.softpro.Project2.repository.CategoryRepository;
 import com.softpro.Project2.service.ProductService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -38,11 +41,27 @@ public class ProductController {
     // ================= ADD PRODUCT =================
 
     @GetMapping("/add")
-    public String addProduct(Model model) {
+    public String addProduct(
+            Model model,
+            HttpSession session) {
+
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        // Admin login check
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
 
         model.addAttribute("product", new Product());
-        model.addAttribute("categoryList", categoryRepository.findAll());
-        model.addAttribute("brandList", brandRepository.findAll());
+        model.addAttribute(
+                "categoryList",
+                categoryRepository.findAll()
+        );
+        model.addAttribute(
+                "brandList",
+                brandRepository.findAll()
+        );
 
         return "admin/product/add";
     }
@@ -54,15 +73,27 @@ public class ProductController {
     public String saveProduct(
             @ModelAttribute Product product,
             @RequestParam("file1") MultipartFile file1,
-            @RequestParam("file2") MultipartFile file2)
+            @RequestParam("file2") MultipartFile file2,
+            HttpSession session)
             throws IOException {
 
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        // Admin login check
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+
+
         // Upload folder
-        String uploadDir = System.getProperty("user.dir") + "/uploads/";
+        String uploadDir =
+                System.getProperty("user.dir") + "/uploads/";
 
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath =
+                Paths.get(uploadDir);
 
-        // Create uploads folder if it doesn't exist
+
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
@@ -72,9 +103,11 @@ public class ProductController {
 
         if (!file1.isEmpty()) {
 
-            String fileName = file1.getOriginalFilename();
+            String fileName =
+                    file1.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath =
+                    uploadPath.resolve(fileName);
 
             file1.transferTo(filePath.toFile());
 
@@ -86,9 +119,11 @@ public class ProductController {
 
         if (!file2.isEmpty()) {
 
-            String fileName = file2.getOriginalFilename();
+            String fileName =
+                    file2.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath =
+                    uploadPath.resolve(fileName);
 
             file2.transferTo(filePath.toFile());
 
@@ -96,7 +131,7 @@ public class ProductController {
         }
 
 
-        // Save product into database
+        // Save product
         productService.saveProduct(product);
 
         return "redirect:/admin/product/list";
@@ -106,7 +141,16 @@ public class ProductController {
     // ================= PRODUCT LIST =================
 
     @GetMapping("/list")
-    public String listProduct(Model model) {
+    public String listProduct(
+            Model model,
+            HttpSession session) {
+
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
 
         model.addAttribute(
                 "products",
@@ -122,15 +166,26 @@ public class ProductController {
     @GetMapping("/edit/{id}")
     public String editProduct(
             @PathVariable Integer id,
-            Model model) {
+            Model model,
+            HttpSession session) {
 
-        Product product = productService.getProductById(id);
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+
+        Product product =
+                productService.getProductById(id);
 
         model.addAttribute("product", product);
+
         model.addAttribute(
                 "categoryList",
                 categoryRepository.findAll()
         );
+
         model.addAttribute(
                 "brandList",
                 brandRepository.findAll()
@@ -146,15 +201,26 @@ public class ProductController {
     public String updateProduct(
             @ModelAttribute Product product,
             @RequestParam("file1") MultipartFile file1,
-            @RequestParam("file2") MultipartFile file2)
+            @RequestParam("file2") MultipartFile file2,
+            HttpSession session)
             throws IOException {
 
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
+
+
         // Upload folder
-        String uploadDir = System.getProperty("user.dir") + "/uploads/";
+        String uploadDir =
+                System.getProperty("user.dir") + "/uploads/";
 
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath =
+                Paths.get(uploadDir);
 
-        // Create folder if it doesn't exist
+
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
@@ -164,9 +230,11 @@ public class ProductController {
 
         if (!file1.isEmpty()) {
 
-            String fileName = file1.getOriginalFilename();
+            String fileName =
+                    file1.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath =
+                    uploadPath.resolve(fileName);
 
             file1.transferTo(filePath.toFile());
 
@@ -178,9 +246,11 @@ public class ProductController {
 
         if (!file2.isEmpty()) {
 
-            String fileName = file2.getOriginalFilename();
+            String fileName =
+                    file2.getOriginalFilename();
 
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath =
+                    uploadPath.resolve(fileName);
 
             file2.transferTo(filePath.toFile());
 
@@ -199,10 +269,19 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(
-            @PathVariable Integer id) {
+            @PathVariable Integer id,
+            HttpSession session) {
+
+        Admin admin =
+                (Admin) session.getAttribute("loggedAdmin");
+
+        if (admin == null) {
+            return "redirect:/admin/login";
+        }
 
         productService.deleteProduct(id);
 
         return "redirect:/admin/product/list";
     }
+
 }

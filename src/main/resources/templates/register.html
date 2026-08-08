@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body p-4">
+
+                    <!-- Heading -->
+
+                    <h2 class="text-center mb-4">
+                        Create Account
+                    </h2>
+
+
+                    <!-- Error Message -->
+
+                    <div th:if="${error}"
+                         class="alert alert-danger"
+                         th:text="${error}">
+
+                        Email already registered!
+
+                    </div>
+
+
+                    <!-- Register Form -->
+
+                    <form th:action="@{/register}"
+                          th:object="${user}"
+                          method="post">
+
+
+                        <!-- Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   th:field="*{name}"
+                                   placeholder="Enter your name"
+                                   required>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   th:field="*{email}"
+                                   placeholder="Enter your email"
+                                   required>
+
+                        </div>
+
+
+                        <!-- Password -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input type="password"
+                                   class="form-control"
+                                   th:field="*{password}"
+                                   placeholder="Enter password"
+                                   required>
+
+                        </div>
+
+
+                        <!-- Register Button -->
+
+                        <button type="submit"
+                                class="btn btn-success w-100">
+
+                            Register
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- Login Link -->
+
+                    <div class="text-center mt-3">
+
+                        Already have an account?
+
+                        <a th:href="@{/login}">
+                            Login
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

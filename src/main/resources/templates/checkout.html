@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+
+<body class="bg-light">
+
+
+<div class="container py-5">
+
+    <h2 class="fw-bold text-success mb-4">
+        Checkout
+    </h2>
+
+
+    <form th:action="@{/order/place}"
+          method="post"
+          onsubmit="setTotalAmount()">
+
+
+        <div class="row">
+
+
+            <!-- ================= CUSTOMER DETAILS ================= -->
+
+            <div class="col-lg-7">
+
+                <div class="card shadow rounded-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="mb-4">
+                            Customer Details
+                        </h4>
+
+
+                        <!-- NAME -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   th:value="${session.loggedUser.name}"
+                                   readonly>
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   th:value="${session.loggedUser.email}"
+                                   readonly>
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Delivery Address
+                            </label>
+
+                            <textarea name="address"
+                                      id="address"
+                                      class="form-control"
+                                      rows="4"
+                                      placeholder="Enter your delivery address"
+                                      required></textarea>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            <input type="tel"
+                                   name="phone"
+                                   id="phone"
+                                   class="form-control"
+                                   placeholder="Enter phone number"
+                                   required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ORDER SUMMARY ================= -->
+
+            <div class="col-lg-5">
+
+                <div class="card shadow rounded-4">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="mb-4">
+                            Order Summary
+                        </h4>
+
+
+                        <!-- CART ITEMS -->
+
+                        <div id="checkout-items">
+
+                            <!-- JavaScript will load cart -->
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <!-- TOTAL -->
+
+                        <div class="d-flex justify-content-between">
+
+                            <strong>
+                                Total
+                            </strong>
+
+                            <strong id="checkout-total"
+                                    class="text-success">
+
+                                ₹0
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Hidden total -->
+
+                        <input type="hidden"
+                               name="totalAmount"
+                               id="totalAmount"
+                               value="0">
+
+
+                        <!-- PLACE ORDER -->
+
+                        <button type="submit"
+                                class="btn btn-success w-100 mt-4">
+
+                            Place Order
+
+                        </button>
+
+
+                        <!-- BACK TO CART -->
+
+                        <a th:href="@{/cart}"
+                           class="btn btn-outline-success w-100 mt-2">
+
+                            Back to Cart
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<script>
+
+// ======================================
+// GRAND TOTAL
+// ======================================
+
+let grandTotal = 0;
+
+
+// ======================================
+// LOAD CART
+// ======================================
+
+function loadCheckout() {
+
+    const cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+
+    const checkoutItems =
+        document.getElementById("checkout-items");
+
+    const checkoutTotal =
+        document.getElementById("checkout-total");
+
+
+    grandTotal = 0;
+
+    checkoutItems.innerHTML = "";
+
+
+    // ==================================
+    // EMPTY CART
+    // ==================================
+
+    if (cart.length === 0) {
+
+        checkoutItems.innerHTML = `
+            <div class="text-center py-3">
+
+                <p class="text-muted">
+                    Your cart is empty.
+                </p>
+
+                <a href="/products"
+                   class="btn btn-outline-success">
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+        `;
+
+        checkoutTotal.innerHTML = "₹0";
+
+        return;
+    }
+
+
+    // ==================================
+    // DISPLAY CART ITEMS
+    // ==================================
+
+    cart.forEach(function(item) {
+
+        const price =
+            Number(item.price) || 0;
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        const itemTotal =
+            price * quantity;
+
+
+        grandTotal += itemTotal;
+
+
+        checkoutItems.innerHTML += `
+
+            <div class="d-flex justify-content-between mb-3">
+
+                <div>
+
+                    <strong>
+                        ${item.name}
+                    </strong>
+
+                    <small class="d-block text-muted">
+                        ₹${price} × ${quantity}
+                    </small>
+
+                </div>
+
+                <strong class="text-success">
+                    ₹${itemTotal}
+                </strong>
+
+            </div>
+
+        `;
+
+    });
+
+
+    // ==================================
+    // SHOW GRAND TOTAL
+    // ==================================
+
+    checkoutTotal.innerHTML =
+        "₹" + grandTotal;
+
+}
+
+
+// ======================================
+// SET TOTAL BEFORE FORM SUBMIT
+// ======================================
+
+function setTotalAmount() {
+
+    document.getElementById("totalAmount").value =
+        grandTotal;
+
+}
+
+
+// ======================================
+// PAGE LOAD
+// ======================================
+
+window.addEventListener(
+    "load",
+    loadCheckout
+);
+
+</script>
+
+
+</body>
+
+</html>

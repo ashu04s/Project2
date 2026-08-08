@@ -3,11 +3,9 @@ package com.softpro.Project2.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.softpro.Project2.entity.Admin;
+import com.softpro.Project2.entity.Order;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, Integer> {
-
-    Admin findByAdminEmail(String adminEmail);
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
 }
