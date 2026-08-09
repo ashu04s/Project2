@@ -27,7 +27,6 @@ public class UserController {
         return "login";
     }
 
-
     @GetMapping("/login")
     public String loginPage() {
         return "login";
@@ -66,6 +65,7 @@ public class UserController {
         // Save new user
         userService.saveUser(user);
 
+        // Registration successful
         return "redirect:/login";
     }
 
@@ -79,20 +79,37 @@ public class UserController {
             HttpSession session,
             Model model) {
 
+        // Find user by email
         User user = userService.findByEmail(email);
 
-        // Check email and password
-        if (user != null &&
-            user.getPassword().equals(password)) {
 
-            // Create session
-            session.setAttribute("loggedUser", user);
+        // Email is not registered
+        if (user == null) {
 
-            // Successful login → Home page
+            model.addAttribute(
+                    "error",
+                    "Please register first!"
+            );
+
+            return "login";
+        }
+
+
+        // Check password
+        if (user.getPassword().equals(password)) {
+
+            // Create login session
+            session.setAttribute(
+                    "loggedUser",
+                    user
+            );
+
+            // Login successful
             return "redirect:/home";
         }
 
-        // Invalid login
+
+        // Password is incorrect
         model.addAttribute(
                 "error",
                 "Invalid email or password"
@@ -109,8 +126,10 @@ public class UserController {
             HttpSession session,
             Model model) {
 
+        // Get logged-in user
         User user =
                 (User) session.getAttribute("loggedUser");
+
 
         // User is not logged in
         if (user == null) {
@@ -118,7 +137,12 @@ public class UserController {
             return "redirect:/login";
         }
 
-        model.addAttribute("user", user);
+
+        // Send user data to profile page
+        model.addAttribute(
+                "user",
+                user
+        );
 
         return "profile";
     }
@@ -127,13 +151,13 @@ public class UserController {
     // ================= LOGOUT =================
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(
+            HttpSession session) {
 
         // Destroy session
         session.invalidate();
 
-        // Logout → Login page
+        // Go back to login
         return "redirect:/";
     }
-
 }

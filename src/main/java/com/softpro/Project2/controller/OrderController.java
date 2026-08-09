@@ -86,10 +86,10 @@ public class OrderController {
             HttpSession session,
             Model model) {
 
+        // Check user login
         User user =
                 (User) session.getAttribute("loggedUser");
 
-        // User login check
         if (user == null) {
             return "redirect:/login";
         }
@@ -113,7 +113,7 @@ public class OrderController {
             HttpSession session,
             Model model) {
 
-        // Admin login check
+        // Check admin login
         Object admin =
                 session.getAttribute("loggedAdmin");
 
@@ -141,7 +141,7 @@ public class OrderController {
             @RequestParam String status,
             HttpSession session) {
 
-        // Admin login check
+        // Check admin login
         Object admin =
                 session.getAttribute("loggedAdmin");
 
@@ -160,5 +160,4 @@ public class OrderController {
         // Back to orders page
         return "redirect:/order/admin/orders";
     }
-
 }
